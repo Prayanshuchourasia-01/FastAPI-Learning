@@ -1,0 +1,43 @@
+Real-World Problem Statement: Campus Smart Parking Slot Booking Backend (API Core Logic)
+Background:
+Your university campus is facing massive traffic congestion near the department parking lots. To solve this, the administration wants a backend API service that handles parking slot statuses, checks availability, and registers vehicle entries.
+
+You need to write a pure Python script (main.py) inside your phase2_practice folder that simulates how a server processes incoming HTTP requests from the campus security gate app.
+
+Requirements & Endpoints to Simulate:
+Write a core function, e.g., handle_parking_request(method: str, endpoint: str, payload: dict = None), that manages a mock database of parking slots and returns appropriate HTTP status codes and response dictionaries:
+
+Get All Parking Slots Status (GET /slots)
+
+What it should do: Return the entire list of parking slots with their current status (e.g., Slot ID, zone name, whether it is available or occupied, and vehicle number if occupied).
+
+Status Code: 200 OK
+
+Check a Specific Slot Details (GET /slots/{id} - simulate using path variables or query parameters in your function arguments)
+
+What it should do: Look up a specific slot by its ID. If it exists, return its details. If it doesn't exist, return a proper error message.
+
+Status Code: 200 OK (if found) or 404 Not Found (if slot ID doesn't exist).
+
+Register Vehicle Entry / Book a Slot (POST /slots/book)
+
+What it should do:
+
+Accept a payload containing vehicle_number, slot_id, and user_type (e.g., "Student", "Faculty").
+
+Validation Check 1: If any of these fields are missing from the payload, reject the request. Return status code 400 Bad Request.
+
+Validation Check 2: If the requested slot_id is already occupied, return status code 409 Conflict.
+
+If all checks pass, update your mock database to mark that slot as occupied, assign the vehicle, and return a success response.
+
+Status Code: 201 Created (on successful booking).
+
+Handle Invalid Routes (Any other method or unknown endpoint)
+
+What it should do: Catch any unmatched routes.
+
+Status Code: 404 Not Found
+
+How to test your code:
+At the bottom of your main.py file, add a few test driver calls (using if __name__ == "__main__":) that simulate sending these exact requests so you can print and see how your mock server logs responses, handles errors, and updates data.
